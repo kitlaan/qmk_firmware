@@ -27,6 +27,10 @@
 #    define ENCODER_RESOLUTION 4
 #endif
 
+#if ENCODER_RESOLUTION <= 0
+#    error ENCODER_RESOLUTION must be non-zero
+#endif
+
 #if !defined(ENCODERS_PAD_A) || !defined(ENCODERS_PAD_B)
 #    error "No encoder pads defined by ENCODERS_PAD_A and ENCODERS_PAD_B"
 #endif
@@ -88,7 +92,7 @@ static void encoder_update(int8_t index, uint8_t state) {
         encoder_value[index]++;
         encoder_update_kb(index, true);
     }
-    if (encoder_pulses[i] <= -ENCODER_RESOLUTION) {  // direction is arbitrary here, but this clockwise
+    else if (encoder_pulses[i] <= -ENCODER_RESOLUTION) {  // direction is arbitrary here, but this clockwise
         encoder_value[index]--;
         encoder_update_kb(index, false);
     }
@@ -110,15 +114,19 @@ void encoder_update_raw(uint8_t* slave_state) {
     for (uint8_t i = 0; i < NUMBER_OF_ENCODERS; i++) {
         uint8_t index = i + thatHand;
         int8_t  delta = slave_state[i] - encoder_value[index];
-        while (delta > 0) {
-            delta--;
-            encoder_value[index]++;
-            encoder_update_kb(index, true);
+        if (delta > 0) {
+            while (delta > 0) {
+                delta--;
+                encoder_value[index]++;
+                encoder_update_kb(index, true);
+            }
         }
-        while (delta < 0) {
-            delta++;
-            encoder_value[index]--;
-            encoder_update_kb(index, false);
+        else if (delta < 0) {
+            while (delta < 0) {
+                delta++;
+                encoder_value[index]--;
+                encoder_update_kb(index, false);
+            }
         }
     }
 }
