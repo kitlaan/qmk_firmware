@@ -43,6 +43,12 @@
 // #define SPLIT_USB_DETECT
 // #define NO_USB_STARTUP_CHECK
 
+// Determine which is the LEFT/RIGHT device, using USB connection:
+//#define MASTER_LEFT
+//#define MASTER_RIGHT
+// Or by EEPROM (flash :dfu-split-left or :dfu-split-right)
+#define EE_HANDS
+
 // Disable. We're not using KC_LCAP, KC_LNUM or KC_LSCR.
 #undef LOCKING_SUPPORT_ENABLE
 
