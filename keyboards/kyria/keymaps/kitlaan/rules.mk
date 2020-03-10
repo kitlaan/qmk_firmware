@@ -15,7 +15,7 @@ SPACE_CADET_ENABLE = no
 MAGIC_ENABLE = no
 
 # Use to reset EEPROM if COL0+ROW0 held down at boot
-#BOOTMAGIC_ENABLE = lite
+BOOTMAGIC_ENABLE = lite
 
 
 # rev1 board with Elite-C rev3.1

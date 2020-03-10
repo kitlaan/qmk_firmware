@@ -18,6 +18,7 @@
 
 #ifdef OLED_DRIVER_ENABLE
   #define OLED_DISPLAY_128X64
+  #define OLED_FONT_H "kitlaan_glcdfont.c"
 #endif
 
 #ifdef RGBLIGHT_ENABLE
@@ -37,11 +38,9 @@
   #define RGBLIGHT_HUE_STEP 8
   #define RGBLIGHT_SAT_STEP 8
   #define RGBLIGHT_VAL_STEP 8
-#endif
 
-// If you are using an Elite C rev3 on the slave side, uncomment the lines below:
-// #define SPLIT_USB_DETECT
-// #define NO_USB_STARTUP_CHECK
+  #define RBGLIGHT_SLEEP
+#endif
 
 // Determine which is the LEFT/RIGHT device, using USB connection:
 //#define MASTER_LEFT
@@ -54,4 +53,3 @@
 
 // Disable. Not currently using these features
 #define NO_ACTION_ONESHOT
-#define NO_ACTION_TAPPING
